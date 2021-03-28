@@ -8,4 +8,8 @@ export class UserController {
   find(@Body() body: any) {
     return this.userService.find(body.name);
   }
+  @Post('findOne')
+  findOne(@Body() body: any) {
+    return this.userService.findOne(body.name);
+  }
 }
