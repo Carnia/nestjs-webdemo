@@ -8,6 +8,13 @@ export class UserService {
   find(name: string): string {
     return name;
   }
+  async login(username: string, passwd: string) {
+    // "username": "lq2",
+    const user = await this.findOne(username);
+    console.log('findOne - user', user);
+    const isOwn = user && user.password === encryptPassword(passwd, user.salt); // 加密密码
+    return isOwn ? user : undefined;
+  }
   /**
    * 查询是否有该用户
    * @param username 用户名
