@@ -12,4 +12,8 @@ export class UserController {
   findOne(@Body() body: any) {
     return this.userService.findOne(body.name);
   }
+  @Post('register')
+  register(@Body() body: any) {
+    return this.userService.register(body);
+  }
 }
