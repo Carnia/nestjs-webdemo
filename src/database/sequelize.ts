@@ -37,12 +37,12 @@ testSyncDB(defaultConnect).catch(
       console.log('原因：没有初始化表, 初始化中...');
       const freeConnect = doConnect();
       freeConnect
-        .query(initDatabase(db.mysql.database))
+        .query(initDatabase(db.mysql.database), { logging: false })
         .then((res) => {
           console.log('初始化成功');
           testSyncDB(defaultConnect);
           // 初始化admin-user表
-          defaultConnect.query(initUserTable('admin_user'));
+          defaultConnect.query(initUserTable('admin_user'), { logging: false });
         })
         .catch((e) => {
           console.log('初始化失败', e);

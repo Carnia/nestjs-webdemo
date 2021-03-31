@@ -5,9 +5,12 @@ import sequelize from '../../database/sequelize'; // 引入 Sequelize 实例
 
 @Injectable()
 export class UserService {
-  find(name: string): string {
-    return name;
-  }
+  /**
+   * 登录
+   * @param username 
+   * @param passwd 
+   * @returns 
+   */
   async login(username: string, passwd: string) {
     // "username": "lq2",
     const user = await this.findOne(username);
@@ -42,6 +45,11 @@ export class UserService {
       return void 0;
     }
   }
+  /**
+   * 注册
+   * @param req 
+   * @returns 
+   */
   async register(req: any): Promise<any> {
     const { accountName, realName, password, repassword, mobile } = req;
     if (password !== repassword) {

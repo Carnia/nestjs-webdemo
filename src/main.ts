@@ -5,7 +5,7 @@ import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('my'); // 全局路由前缀
+  app.setGlobalPrefix('carnia'); // 全局路由前缀
   app.use(cookieParser());
   app.use(
     session({
