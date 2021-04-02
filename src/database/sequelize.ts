@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import db from '../../config/db';
+import db from '../config/db';
 import { initDatabase } from './sql/initDatabase';
 import { initUserTable } from './sql/initUserTable';
 
