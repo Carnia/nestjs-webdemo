@@ -1,5 +1,6 @@
 import { Controller, Get, Request } from '@nestjs/common';
 import { AppService } from './app.service';
+import { logger } from './utils/log4js';
 
 @Controller()
 export class AppController {
@@ -7,7 +8,7 @@ export class AppController {
 
   @Get()
   rootPage(@Request() req) {
-    console.log('是否有session', req.session.user);
+    logger.info('是否有session', req.session.user);
     return `
           <button id="login">login</button>
           <br>

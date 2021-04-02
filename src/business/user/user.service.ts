@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import * as Sequelize from 'sequelize'; // 引入 Sequelize 库
 import { encryptPassword, makeSalt } from 'src/utils/cryptogram';
+import { Logger, logger } from 'src/utils/log4js';
 import sequelize from '../../database/sequelize'; // 引入 Sequelize 实例
 
 @Injectable()
 export class UserService {
   /**
    * 登录
-   * @param username 
-   * @param passwd 
-   * @returns 
+   * @param username
+   * @param passwd
+   * @returns
    */
   async login(username: string, passwd: string) {
     // "username": "lq2",
     const user = await this.findOne(username);
-    console.log('findOne - user', user);
     const isOwn = user && user.password === encryptPassword(passwd, user.salt); // 加密密码
     return isOwn ? user : undefined;
   }
@@ -36,19 +36,20 @@ export class UserService {
       const res = await sequelize.query(sql, {
         type: Sequelize.QueryTypes.SELECT, // 查询方式
         raw: true, // 是否使用数组组装的方式展示结果
-        logging: true, // 是否将 SQL 语句打印到控制台，默认为 true
+        logging: false, // 是否将 SQL 语句打印到控制台，默认为 true
       });
       const user = res[0]; // 查出来的结果是一个数组，我们只取第一个。
+      logger.info('findOne - user', user);
       return user;
     } catch (error) {
-      console.log(error);
+      Logger.error(error);
       return void 0;
     }
   }
   /**
    * 注册
-   * @param req 
-   * @returns 
+   * @param req
+   * @returns
    */
   async register(req: any): Promise<any> {
     const { accountName, realName, password, repassword, mobile } = req;
