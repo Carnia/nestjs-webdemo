@@ -34,8 +34,8 @@ export default {
       // type: 'console', // 会打印到控制台
       type: 'stdout',
       layout: {
-        type: 'coding'
-      }
+        type: 'coding',
+      },
     },
     access: {
       type: 'dateFile', // 会写入文件，并按照日期分类
@@ -94,8 +94,8 @@ export default {
 
 Log4js.addLayout('coding', (logConfig: any) => {
   return (logEvent: Log4js.LoggingEvent): string => {
-    let moduleName: string = '';
-    let position: string = '';
+    let moduleName = '';
+    let position = '';
 
     // 日志组装
     const messageList: string[] = [];
@@ -119,16 +119,14 @@ Log4js.addLayout('coding', (logConfig: any) => {
     // 日志组成部分
     const messageOutput: string = messageList.join(' ');
     const positionOutput: string = position ? ` [${position}]` : '';
-    const typeOutput: string = `[${
-      logConfig.type
-    }] ${logEvent.pid.toString()} - `;
-    const dateOutput: string = `${Moment(logEvent.startTime).format(
+    const typeOutput = `[${logConfig.type}] ${logEvent.pid.toString()} - `;
+    const dateOutput = `${Moment(logEvent.startTime).format(
       'YYYY-MM-DD HH:mm:ss',
     )}`;
     const moduleOutput: string = moduleName
       ? `[${moduleName}] `
       : '[LoggerService] ';
-    let levelOutput: string = `[${logEvent.level}] ${messageOutput}`;
+    let levelOutput = `[${logEvent.level}] ${messageOutput}`;
 
     // 根据日志级别，用不同颜色区分
     switch (logEvent.level.toString()) {

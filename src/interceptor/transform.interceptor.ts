@@ -13,7 +13,7 @@ import { Logger } from '../utils/log4js';
 export class TransformInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const req = context.getArgByIndex(1).req;
-    
+
     return next.handle().pipe(
       map((data) => {
         const logFormat = ` Response: original url: ${req.originalUrl}

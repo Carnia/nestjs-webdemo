@@ -22,8 +22,8 @@ export class UserController {
   }
   @Post('findOne')
   async findOne(@Body() body: any) {
-    const res = await this.userService.findOne(body.name) || 'no user'
-    return  res;
+    const res = (await this.userService.findOne(body.name)) || 'no user';
+    return res;
   }
   @Post('register')
   register(@Body() body: any) {
