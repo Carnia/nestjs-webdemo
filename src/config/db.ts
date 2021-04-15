@@ -2,10 +2,10 @@
 const productConfig = {
   mysql: {
     port: 3306,
-    host: '数据库地址',
-    user: '用户名',
-    password: '密码',
-    database: 'nest_zero_to_one', // 库名
+    host: '34.80.20.130',
+    user: 'root',
+    password: '123',
+    database: 'nestdb', // 库名
     connectionLimit: 10, // 连接限制
   },
 };
