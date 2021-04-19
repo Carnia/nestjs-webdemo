@@ -8,6 +8,9 @@ import { TransformInterceptor } from './interceptor/transform.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: 'http://localhost:3001',
+  });
   app.setGlobalPrefix('carnia'); // 全局路由前缀
   app.use(cookieParser());
   app.use(express.json()); // For parsing application/json
