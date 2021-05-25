@@ -14,8 +14,12 @@ export class AppController {
           <br>
           <a href="/carnia">home</a>
           ${JSON.stringify(req.session.user)}
+          <br>
+          <button id="testLogin">test login</button>
+          <br>
           <script>
             const $login = document.querySelector('#login')
+            const $testLogin = document.querySelector('#testLogin')
             $login.addEventListener('click', function name(params) {
               fetch('http://localhost:3000/carnia/user/login',{
                 method: 'POST',
@@ -23,6 +27,15 @@ export class AppController {
                   'Content-Type': 'application/json'
                 }),
                 body: JSON.stringify({username:"lq2",password:"123"})
+              })
+            })
+            $testLogin.addEventListener('click', function name(params) {
+              fetch('http://localhost:3000/carnia/demo/testLogin',{
+                method: 'POST',
+                // headers: new Headers({
+                //   'Content-Type': 'application/json'
+                // }),
+                // body: JSON.stringify({username:"lq2",password:"123"})
               })
             })
           </script>`;
