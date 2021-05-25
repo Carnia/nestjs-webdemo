@@ -24,7 +24,7 @@ let defaultConnect = doConnect(db.mysql.database);
 // 测试数据库链接
 const testSyncDB = (connect) => {
   return connect.authenticate().then(() => {
-    console.log('数据库连接成功');
+    console.log('数据库连接成功, host:', db.mysql.host);
     defaultConnect = connect;
   });
 };

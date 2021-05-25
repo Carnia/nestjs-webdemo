@@ -22,7 +22,7 @@ export class AppController {
                 headers: new Headers({
                   'Content-Type': 'application/json'
                 }),
-                body: JSON.stringify({username:"lq2",passwd:"123"})
+                body: JSON.stringify({username:"lq2",password:"123"})
               })
             })
           </script>`;

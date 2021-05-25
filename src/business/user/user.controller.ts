@@ -17,8 +17,8 @@ export class UserController {
   @UsePipes(new ValidationPipe())
   @Post('login')
   async login(@Session() session, @Body() body: LoginInfoDTO) {
-    const { accountName, password } = body;
-    const user = await this.userService.login(accountName, password);
+    const { username, password } = body;
+    const user = await this.userService.login(username, password);
     if (user) {
       session.user = user;
       return {
