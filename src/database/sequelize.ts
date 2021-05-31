@@ -22,11 +22,13 @@ const doConnect = (database = '') => {
 
 let defaultConnect = doConnect(db.mysql.database);
 // 测试数据库链接
-const testSyncDB = (connect) => {
-  return connect.authenticate().then(() => {
-    console.log('数据库连接成功, host:', db.mysql.host);
-    defaultConnect = connect;
-  });
+const testSyncDB = async (connect) => {
+  await connect.authenticate();
+  console.log('数据库连接成功, host:', db.mysql.host);
+  defaultConnect = connect;
+  // 初始化admin-user表
+  await defaultConnect.query(initUserTable('admin_user'), { logging: false });
+  console.log(`数据库表：${'admin_user'}初始化成功`);
 };
 
 testSyncDB(defaultConnect).catch(
@@ -41,8 +43,6 @@ testSyncDB(defaultConnect).catch(
         .then((res) => {
           console.log('初始化成功');
           testSyncDB(defaultConnect);
-          // 初始化admin-user表
-          defaultConnect.query(initUserTable('admin_user'), { logging: false });
         })
         .catch((e) => {
           console.log('初始化失败', e);
