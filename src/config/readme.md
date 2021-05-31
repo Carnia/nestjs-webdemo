@@ -27,3 +27,7 @@ use 7NLLUlDKrv;
 -- show full fields from admin_user;
 select * from admin_user;
 ```
+
+
+### 其他免费服务
+https://www.db4free.net/signup.php
