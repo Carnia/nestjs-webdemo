@@ -1,16 +1,16 @@
 // config/db.ts
-const productConfig = {
+const localConfig = {
   mysql: {
     port: 3306,
-    host: 'remotemysql.com',
-    user: '7NLLUlDKrv',
-    password: 'GL56ml44lG',
-    database: '7NLLUlDKrv', // 库名
-    connectionLimit: 10, // 连接限制
+    host: 'carnia-al.mysql.rds.aliyuncs.com',
+    user: 'carnia',
+    password: 'lIqIAng000',
+    database: 'nest_demo', // 库名
+    connectionLimit: 2000, // 连接限制
   },
 };
 
-const localConfig = {
+const productConfig = {
   mysql: {
     port: 3306,
     host: 'remotemysql.com',
