@@ -10,6 +10,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: 'http://localhost:3001',
+    maxAge: 1800, // 表示隔30分钟才发起预检请求
+    credentials: true, // 允许跨域使用设置cookie
   });
   app.setGlobalPrefix('carnia'); // 全局路由前缀
   app.use(cookieParser());
