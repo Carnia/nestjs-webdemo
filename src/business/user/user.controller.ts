@@ -23,6 +23,7 @@ export class UserController {
       session.user = user;
       return {
         code: 200,
+        msg: '登陆成功',
       };
     } else {
       return {
