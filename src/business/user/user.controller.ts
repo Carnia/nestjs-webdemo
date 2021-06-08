@@ -5,8 +5,10 @@ import {
   Post,
   Request,
   Session,
+  UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
+import { LoginInterceptor } from 'src/interceptor/login.interceptor';
 import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { LoginInfoDTO } from './user.dto';
 import { UserService } from './user.service';
@@ -37,6 +39,21 @@ export class UserController {
     const res = (await this.userService.findOne(body.name)) || 'no user';
     return res;
   }
+
+  @UseInterceptors(LoginInterceptor)
+  @Post('getUserInfo')
+  async getUserInfo(@Session() session) {
+    const res = { ...session.user };
+    delete res.realName;
+    delete res.password;
+    delete res.salt;
+    delete res.role;
+    return {
+      code: 200,
+      data: res,
+    };
+  }
+
   @Post('register')
   register(@Body() body: any) {
     return this.userService.register(body);
