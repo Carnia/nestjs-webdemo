@@ -47,7 +47,6 @@ export class UserController {
     delete res.realName;
     delete res.password;
     delete res.salt;
-    delete res.role;
     return {
       code: 200,
       data: res,
