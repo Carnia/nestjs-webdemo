@@ -34,6 +34,16 @@ export class UserController {
       };
     }
   }
+  @UseInterceptors(LoginInterceptor)
+  @Post('logout')
+  async logout(@Session() session) {
+    session.destroy();
+    return {
+      code: 200,
+      data: {},
+    };
+  }
+
   @Post('findOne')
   async findOne(@Body() body: any) {
     const res = (await this.userService.findOne(body.name)) || 'no user';
