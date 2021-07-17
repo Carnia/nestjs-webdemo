@@ -26,7 +26,7 @@ async function bootstrap() {
       secret: 'lq2jh',
       saveUninitialized: true,
       resave: false,
-      cookie: { maxAge: 60000 },
+      cookie: { maxAge: 1000 * 60 * 10 },
     }),
   );
   await app.listen(3000);
