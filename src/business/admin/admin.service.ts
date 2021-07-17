@@ -6,8 +6,7 @@ import sequelize from '../../database/sequelize'; // 引入 Sequelize 实例
 @Injectable()
 export class AdminService {
   /**
-   * 查询是否有该用户
-   * @param username 用户名
+   * 获取用户列表
    */
   async getUserList(
     currentPage: number,
@@ -27,6 +26,24 @@ export class AdminService {
         logging: false, // 是否将 SQL 语句打印到控制台，默认为 true
       });
       return users;
+    } catch (error) {
+      Logger.error(error);
+      return void 0;
+    }
+  }
+  /**
+   * 设置用户角色
+   */
+  async setUserRole(userId: string, role: string): Promise<any | undefined> {
+    const sql = `
+      UPDATE user SET role = '${role}' WHERE user_id = '${userId}'
+    `;
+    try {
+      await sequelize.query(sql, {
+        type: Sequelize.QueryTypes.UPDATE, // 查询方式
+        raw: true, // 是否使用数组组装的方式展示结果
+        logging: false, // 是否将 SQL 语句打印到控制台，默认为 true
+      });
     } catch (error) {
       Logger.error(error);
       return void 0;
