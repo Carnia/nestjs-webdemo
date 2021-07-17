@@ -28,7 +28,7 @@ export class UserService {
         user_id userId, account_name username, real_name realName, passwd password,
         passwd_salt salt, mobile, role
       FROM
-        admin_user
+        user
       WHERE
         account_name = '${username}'
     `; // 一段平淡无奇的 SQL 查询语句
@@ -69,7 +69,7 @@ export class UserService {
     const salt = makeSalt(); // 制作密码盐
     const hashPwd = encryptPassword(password, salt); // 加密密码
     const registerSQL = `
-      INSERT INTO admin_user
+      INSERT INTO user
         (account_name, real_name, passwd, passwd_salt, mobile, user_status, role, create_by)
       VALUES
         ('${accountName}', '${realName}', '${hashPwd}', '${salt}', '${mobile}', 1, 3, 0)

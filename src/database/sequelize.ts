@@ -27,8 +27,8 @@ const testSyncDB = async (connect) => {
   console.log('数据库连接成功, host:', db.mysql.host);
   defaultConnect = connect;
   // 初始化admin-user表
-  await defaultConnect.query(initUserTable('admin_user'), { logging: false });
-  console.log(`数据库表：${'admin_user'}初始化成功`);
+  await defaultConnect.query(initUserTable('user'), { logging: false });
+  console.log(`数据库表：${'user'}初始化成功`);
 };
 
 testSyncDB(defaultConnect).catch(
