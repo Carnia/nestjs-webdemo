@@ -3,7 +3,12 @@ import * as Sequelize from 'sequelize'; // 引入 Sequelize 库
 import { encryptPassword, makeSalt } from 'src/utils/cryptogram';
 import { Logger, logger } from 'src/utils/log4js';
 import sequelize from '../../database/sequelize'; // 引入 Sequelize 实例
+import SnowflakeId from 'snowflake-id';
 
+const guid = () => {
+  const id = new SnowflakeId();
+  return id.generate();
+};
 @Injectable()
 export class UserService {
   /**
@@ -70,9 +75,9 @@ export class UserService {
     const hashPwd = encryptPassword(password, salt); // 加密密码
     const registerSQL = `
       INSERT INTO user
-        (account_name, real_name, passwd, passwd_salt, mobile, user_status, role, create_by)
+        (user_id, account_name, real_name, passwd, passwd_salt, mobile, user_status, role, create_by)
       VALUES
-        ('${accountName}', '${realName}', '${hashPwd}', '${salt}', '${mobile}', 1, 3, 0)
+        ('${guid()}', '${accountName}', '${realName}', '${hashPwd}', '${salt}', '${mobile}', 1, 3, 0)
     `;
     try {
       await sequelize.query(registerSQL, { logging: false });

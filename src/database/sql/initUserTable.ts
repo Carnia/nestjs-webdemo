@@ -1,7 +1,8 @@
 export const initUserTable = (
   table_name,
 ) => `CREATE TABLE IF NOT EXISTS ${table_name} (
-  user_id smallint(6) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  id int NOT NULL AUTO_INCREMENT COMMENT '主键',
+  user_id bigint(64) NOT NULL COMMENT '用户ID',
   account_name varchar(24) NOT NULL COMMENT '用户账号',
   real_name varchar(20) NOT NULL COMMENT '真实姓名',
   passwd char(32) NOT NULL COMMENT '密码',
@@ -13,6 +14,6 @@ export const initUserTable = (
   create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   update_by smallint(6) NOT NULL DEFAULT '0' COMMENT '修改人ID',
   update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  PRIMARY KEY (user_id),
+  PRIMARY KEY (id),
   KEY idx_m (mobile)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='后台用户表';`;
